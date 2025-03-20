@@ -1,6 +1,25 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { initFederation as initNativeFederation } from '@angular-architects/native-federation';
+import { init as initModuleFederation } from '@module-federation/enhanced/runtime';
+import { getShared } from './app/shared/federation-helper';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+(async () => {
+  // Step 1: Initialize Native Federation
+  await initNativeFederation();
+
+  // Step 2: Get metadata about libs shared via Native Federation
+  const shared = getShared();
+
+  // Step 3: Initialize Module Federation
+  //  Remarks: Consider loading this MF config via the fetch API
+  initModuleFederation({
+    name: 'shell',
+    remotes: [
+    ],
+    // Step 3a: Delegate shared libs from Native Federation
+    shared,
+  })
+  .initializeSharing();
+
+  // Step 4: Delegate to file bootstrapping the SPA
+  await import('./bootstrap');
+})();
