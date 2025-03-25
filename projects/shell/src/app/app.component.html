@@ -208,12 +208,14 @@
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
+      <lib-my-lib></lib-my-lib>
       @if(component()){
       <ng-container *ngComponentOutlet="component()"></ng-container>
       }
       @if(modComponent()){
       <ng-container *ngComponentOutlet="modComponent()"></ng-container>
       }
+      <button (click)="getData()">CLick Me</button>
     </div>
   </div>
 </main>

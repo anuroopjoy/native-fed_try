@@ -4,12 +4,14 @@ import {
 } from '@module-federation/enhanced/runtime';
 import { loadRemoteModule as loadNativeRemote } from '@angular-architects/native-federation';
 import { NgComponentOutlet } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { MyLibComponent } from 'my-lib';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-shell-root',
-  imports: [RouterOutlet, NgComponentOutlet],
+  imports: [RouterOutlet, NgComponentOutlet, MyLibComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -17,7 +19,7 @@ export class AppComponent implements OnInit {
   title = 'shell';
   component = signal(null);
   modComponent = signal(null);
-
+  client = inject(HttpClient);
   ngOnInit() {
     loadNativeRemote({
       remoteName: 'todo',
@@ -38,6 +40,12 @@ export class AppComponent implements OnInit {
     );
     loadModuleRemote<any>('mfe/Component').then((m) => {
       this.modComponent.set(m.AppComponent);
+    });
+  }
+  getData() {
+   
+    this.client.get('/api/data').subscribe((data) => {
+      console.log(data);
     });
   }
 }

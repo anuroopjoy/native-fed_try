@@ -21,13 +21,13 @@
     "es-module-shims": "^1.5.12",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.15.0"
+    "zone.js": "~0.15.0",
+    "@angular-architects/module-federation": "^19.0.3",
+    "@softarc/native-federation-node": "^2.0.10",
+    "@angular-architects/native-federation": "^19.0.16"
   },
   "devDependencies": {
-    "@angular-architects/module-federation": "^19.0.3",
     "@module-federation/enhanced": "^0.11.1",
-    "@softarc/native-federation-node": "^2.0.10",
-    "@angular-architects/native-federation": "^19.0.16",
     "@angular-devkit/build-angular": "^19.2.4",
     "@angular/cli": "^19.1.5",
     "@angular/compiler-cli": "^19.1.0",
@@ -38,6 +38,7 @@
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
+    "ng-packagr": "^19.2.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
   }
