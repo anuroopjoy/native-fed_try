@@ -5,9 +5,11 @@ import {
     input,
     ViewContainerRef,
 } from '@angular/core';
+import { getShared } from '@angular-architects/native-federation';
 import {
     loadRemote as loadModuleRemote,
     registerRemotes,
+    init,
 } from '@module-federation/enhanced/runtime';
 
 @Directive({ selector: '[modFedCreator]' })
@@ -19,6 +21,16 @@ export class ModuleFedCreatorDirective {
     }>();
     private viewContainerRef = inject(ViewContainerRef);
     constructor() {
+        // Step 2: Get metadata about libs shared via Native Federation
+        const shared = getShared();
+
+        // Step 3: Initialize Module Federation
+        //  Remarks: Consider loading this MF config via the fetch API
+        init({
+            name: 'shell',
+            remotes: [],
+            shared,
+        }).initializeSharing();
         effect(() => {
             if (this.modFedCreator()) {
                 this.loadComponent();
@@ -29,6 +41,7 @@ export class ModuleFedCreatorDirective {
         this.viewContainerRef.clear();
         const { remoteEntry, remoteName, exposedModule } =
             this.modFedCreator()!;
+        debugger;
         registerRemotes(
             [
                 {
