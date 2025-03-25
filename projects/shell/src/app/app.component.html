@@ -4,7 +4,7 @@
 <!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <style>
@@ -212,8 +212,8 @@
       @if(component()){
       <ng-container *ngComponentOutlet="component()"></ng-container>
       }
-      @if(modComponent()){
-      <ng-container *ngComponentOutlet="modComponent()"></ng-container>
+      @if(modInput()){
+      <ng-container [modFedCreator]="modInput()"></ng-container>
       }
       <button (click)="getData()">CLick Me</button>
     </div>
